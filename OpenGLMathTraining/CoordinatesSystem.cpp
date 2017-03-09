@@ -74,7 +74,7 @@ void CoordinatesSystem::Render()
     
     // Camera transformation
     GLuint transformLoc = glGetUniformLocation(myShader->Program, "transformMatrix");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(camera->GetCameraMat4()));
+    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(camera->GetViewMatrix()));
     
     //glDrawArrays(GL_TRIANGLES, 0, 3);
     glDrawArrays(GL_LINES, 0, 6);

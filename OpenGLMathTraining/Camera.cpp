@@ -21,7 +21,23 @@ Camera::~Camera()
 {
 }
 
-glm::mat4 Camera::GetCameraMat4() const
+glm::mat4 Camera::GetViewMatrix() const
 {
     return glm::mat4();
+}
+
+void Camera::ProcessMouseScroll(GLfloat yoffset)
+{
+}
+
+void Camera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch)
+{
+}
+
+void Camera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime)
+{
+}
+
+void Camera::updateCameraVectors()
+{
 }
