@@ -28,6 +28,11 @@ CoordinatesSystem::CoordinatesSystem(Shader *shader) :
         // Positions         // Colors
         0.5f,  0.0f,  0.0f,   1.0f, 0.0f, 0.0f,  // X main
        -0.5f,  0.0f,  0.0f,   0.0f, 1.0f, 0.0f,  // X main
+        0.5f,  0.0f,  0.5f,   1.0f, 0.0f, 0.0f,  // X 1l
+       -0.5f,  0.0f,  0.5f,   0.0f, 1.0f, 0.0f,  // X 1l
+        0.5f,  0.0f, -0.5f,   1.0f, 0.0f, 0.0f,  // X 1l
+       -0.5f,  0.0f, -0.5f,   0.0f, 1.0f, 0.0f,  // X 1l
+        
         0.0f,  0.5f,  0.0f,   1.0f, 0.0f, 0.0f,  // Y main
         0.0f, -0.5f,  0.0f,   0.0f, 1.0f, 0.0f,  // Y main
         0.0f,  0.0f, -0.5f,   1.0f, 0.0f, 0.0f,  // Z main
@@ -81,9 +86,10 @@ void CoordinatesSystem::Render()
     projection = camera->GetProjection();
     
     glm::mat4 model;
-    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.0f));
-    model = glm::scale(model, glm::vec3(2.0f));
+    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -5.0f));
     model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+    model = glm::scale(model, glm::vec3(7.0f, 2.0f, 7.0f));
+
     
     transformMatrix = projection * view * model;
     
@@ -93,6 +99,6 @@ void CoordinatesSystem::Render()
     glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transformMatrix));
     
     //glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDrawArrays(GL_LINES, 0, 6);
+    glDrawArrays(GL_LINES, 0, 10);
     glBindVertexArray(0);
 }
