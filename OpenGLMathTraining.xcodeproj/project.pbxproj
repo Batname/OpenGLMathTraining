@@ -11,6 +11,7 @@
 		181E72E81E6D948000008486 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181E72E71E6D948000008486 /* OpenGL.framework */; };
 		181E72EA1E6D949700008486 /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 181E72E91E6D949700008486 /* libGLEW.1.13.0.dylib */; };
 		181E72EC1E6D94B700008486 /* libglfw3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 181E72EB1E6D94B700008486 /* libglfw3.3.1.dylib */; };
+		18A433981E7142E8000A6493 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18A433961E7142E8000A6493 /* Camera.cpp */; };
 		18CCF4AB1E7126D4006161C5 /* shaders in CopyFiles */ = {isa = PBXBuildFile; fileRef = 18CCF4AA1E712692006161C5 /* shaders */; };
 		18CCF4B01E712BA6006161C5 /* CoordinatesSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CCF4AE1E712BA6006161C5 /* CoordinatesSystem.cpp */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,8 @@
 		181E72E71E6D948000008486 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		181E72E91E6D949700008486 /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.13.0.dylib; path = ../../../../../../usr/local/Cellar/glew/1.13.0/lib/libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
 		181E72EB1E6D94B700008486 /* libglfw3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.1.dylib; path = ../../../../../../usr/local/Cellar/glfw3/3.1.2/lib/libglfw3.3.1.dylib; sourceTree = "<group>"; };
+		18A433961E7142E8000A6493 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		18A433971E7142E8000A6493 /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		18CCF4AA1E712692006161C5 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shaders; sourceTree = "<group>"; };
 		18CCF4AC1E712777006161C5 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
 		18CCF4AD1E7129A7006161C5 /* callbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = callbacks.h; sourceTree = "<group>"; };
@@ -81,6 +84,8 @@
 				18CCF4AD1E7129A7006161C5 /* callbacks.h */,
 				18CCF4AE1E712BA6006161C5 /* CoordinatesSystem.cpp */,
 				18CCF4AF1E712BA6006161C5 /* CoordinatesSystem.hpp */,
+				18A433961E7142E8000A6493 /* Camera.cpp */,
+				18A433971E7142E8000A6493 /* Camera.hpp */,
 			);
 			path = OpenGLMathTraining;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18CCF4B01E712BA6006161C5 /* CoordinatesSystem.cpp in Sources */,
+				18A433981E7142E8000A6493 /* Camera.cpp in Sources */,
 				181E72E01E6D786500008486 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

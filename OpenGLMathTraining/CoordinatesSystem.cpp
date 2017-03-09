@@ -8,10 +8,18 @@
 
 #include "CoordinatesSystem.hpp"
 #include "Shader.h"
+#include "Camera.hpp"
 
 
 #include <stdlib.h>
 #include <stdio.h>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+extern Camera *camera;
+
 
 CoordinatesSystem::CoordinatesSystem(Shader *shader) :
     myShader(shader)
@@ -63,6 +71,11 @@ void CoordinatesSystem::Render()
     // Draw the triangle
     myShader->Use();
     glBindVertexArray(VAO);
+    
+    // Camera transformation
+    GLuint transformLoc = glGetUniformLocation(myShader->Program, "transformMatrix");
+    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(camera->GetCameraMat4()));
+    
     //glDrawArrays(GL_TRIANGLES, 0, 3);
     glDrawArrays(GL_LINES, 0, 6);
     glBindVertexArray(0);

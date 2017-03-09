@@ -11,12 +11,17 @@
 // Other includes
 #include "Shader.h"
 #include "callbacks.h"
+#include "Camera.hpp"
 
 // graphics
 #include "CoordinatesSystem.hpp"
 
 // Window dimensions
 const GLuint WIDTH = 800, HEIGHT = 600;
+
+GLFWwindow* window;
+Camera *camera;
+
 
 // The MAIN function, from here we start the application and run the game loop
 int main()
@@ -31,7 +36,7 @@ int main()
     glfwWindowHint(GLFW_RELEASE, GL_FALSE);
     
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);
+    window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);
     glfwMakeContextCurrent(window);
     
     // Set the required callback functions
@@ -45,6 +50,9 @@ int main()
     // Define the viewport dimensions
     glViewport(0, 0, WIDTH, HEIGHT);
     
+    
+    // Set the camera
+    camera = new Camera;
     
     // Build and compile our shader program
     Shader ourShader("./shaders/vertex.glsl", "./shaders/fragment.glsl");
@@ -71,6 +79,9 @@ int main()
 
     // Terminate GLFW, clearing any resources allocated by GLFW.
     glfwTerminate();
+    
+    delete camera;
+    
     return 0;
 }
 
