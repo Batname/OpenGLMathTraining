@@ -26,17 +26,32 @@ CoordinatesSystem::CoordinatesSystem(Shader *shader) :
     // Set up vertex data (and buffer(s)) and attribute pointers
     GLfloat vertices[VERTICES_QTY] = {
         // Positions         // Colors
-        0.5f,  0.0f,  0.0f,   1.0f, 0.0f, 0.0f,  // X main
-       -0.5f,  0.0f,  0.0f,   0.0f, 1.0f, 0.0f,  // X main
-        0.5f,  0.0f,  0.5f,   1.0f, 0.0f, 0.0f,  // X 1l
-       -0.5f,  0.0f,  0.5f,   0.0f, 1.0f, 0.0f,  // X 1l
-        0.5f,  0.0f, -0.5f,   1.0f, 0.0f, 0.0f,  // X 1l
-       -0.5f,  0.0f, -0.5f,   0.0f, 1.0f, 0.0f,  // X 1l
+        0.5f,  0.0f,  0.0f,   1.0f, 1.0f, 1.0f,  // X main
+       -0.5f,  0.0f,  0.0f,   1.0f, 1.0f, 1.0f,  // X main
+        0.5f,  0.0f,  0.25f,   1.0f, 0.0f, 0.0f, // X 1l
+       -0.5f,  0.0f,  0.25f,   1.0f, 0.0f, 0.0f, // X 1l
+        0.5f,  0.0f, -0.25f,   1.0f, 0.0f, 0.0f, // X 1r
+       -0.5f,  0.0f, -0.25f,   1.0f, 0.0f, 0.0f, // X 1r
+       
+        0.5f,  0.0f,  0.5f,   1.0f, 0.0f, 0.0f,  // X 2l
+       -0.5f,  0.0f,  0.5f,   1.0f, 0.0f, 0.0f,  // X 2l
+        0.5f,  0.0f, -0.5f,   1.0f, 0.0f, 0.0f,  // X 2r
+       -0.5f,  0.0f, -0.5f,   1.0f, 0.0f, 0.0f,  // X 2r
         
-        0.0f,  0.5f,  0.0f,   1.0f, 0.0f, 0.0f,  // Y main
-        0.0f, -0.5f,  0.0f,   0.0f, 1.0f, 0.0f,  // Y main
-        0.0f,  0.0f, -0.5f,   1.0f, 0.0f, 0.0f,  // Z main
-        0.0f,  0.0f,  0.5f,   0.0f, 1.0f, 0.0f   // Z main
+        0.0f,  0.5f,  0.0f,   1.0f, 1.0f, 1.0f,  // Y main
+        0.0f, -0.5f,  0.0f,   1.0f, 1.0f, 1.0f,  // Y main
+        
+        0.0f,  0.0f, -0.5f,   1.0f, 1.0f, 1.0f,  // Z main
+        0.0f,  0.0f,  0.5f,   1.0f, 1.0f, 1.0f,  // Z main
+        0.25f,  0.0f, -0.5f,   1.0f, 0.0f, 0.0f, // Z 1l
+        0.25f,  0.0f,  0.5f,   1.0f, 0.0f, 0.0f, // Z 1l
+       -0.25f,  0.0f, -0.5f,   1.0f, 0.0f, 0.0f, // Z 1r
+       -0.25f,  0.0f,  0.5f,   1.0f, 0.0f, 0.0f, // Z 1r
+        
+        0.5f,  0.0f, -0.5f,   1.0f, 0.0f, 0.0f,  // Z 2l
+        0.5f,  0.0f,  0.5f,   1.0f, 0.0f, 0.0f,  // Z 2l
+       -0.5f,  0.0f, -0.5f,   1.0f, 0.0f, 0.0f,  // Z 2r
+       -0.5f,  0.0f,  0.5f,   1.0f, 0.0f, 0.0f   // Z 2r
     };
     
     memcpy(Vertices, vertices, sizeof(vertices));
@@ -99,6 +114,6 @@ void CoordinatesSystem::Render()
     glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transformMatrix));
     
     //glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDrawArrays(GL_LINES, 0, 10);
+    glDrawArrays(GL_LINES, 0, 22);
     glBindVertexArray(0);
 }
