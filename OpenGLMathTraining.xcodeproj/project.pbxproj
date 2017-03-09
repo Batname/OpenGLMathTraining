@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		181E72E01E6D786500008486 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 181E72DF1E6D786500008486 /* main.c */; };
+		181E72E01E6D786500008486 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 181E72DF1E6D786500008486 /* main.cpp */; };
+		181E72E81E6D948000008486 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181E72E71E6D948000008486 /* OpenGL.framework */; };
+		181E72EA1E6D949700008486 /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 181E72E91E6D949700008486 /* libGLEW.1.13.0.dylib */; };
+		181E72EC1E6D94B700008486 /* libglfw3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 181E72EB1E6D94B700008486 /* libglfw3.3.1.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +27,10 @@
 
 /* Begin PBXFileReference section */
 		181E72DC1E6D786500008486 /* OpenGLMathTraining */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGLMathTraining; sourceTree = BUILT_PRODUCTS_DIR; };
-		181E72DF1E6D786500008486 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		181E72DF1E6D786500008486 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		181E72E71E6D948000008486 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		181E72E91E6D949700008486 /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.13.0.dylib; path = ../../../../../../usr/local/Cellar/glew/1.13.0/lib/libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
+		181E72EB1E6D94B700008486 /* libglfw3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.1.dylib; path = ../../../../../../usr/local/Cellar/glfw3/3.1.2/lib/libglfw3.3.1.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +38,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181E72EC1E6D94B700008486 /* libglfw3.3.1.dylib in Frameworks */,
+				181E72EA1E6D949700008486 /* libGLEW.1.13.0.dylib in Frameworks */,
+				181E72E81E6D948000008486 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +52,7 @@
 			children = (
 				181E72DE1E6D786500008486 /* OpenGLMathTraining */,
 				181E72DD1E6D786500008486 /* Products */,
+				181E72E61E6D948000008486 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +67,19 @@
 		181E72DE1E6D786500008486 /* OpenGLMathTraining */ = {
 			isa = PBXGroup;
 			children = (
-				181E72DF1E6D786500008486 /* main.c */,
+				181E72DF1E6D786500008486 /* main.cpp */,
 			);
 			path = OpenGLMathTraining;
+			sourceTree = "<group>";
+		};
+		181E72E61E6D948000008486 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				181E72EB1E6D94B700008486 /* libglfw3.3.1.dylib */,
+				181E72E91E6D949700008486 /* libGLEW.1.13.0.dylib */,
+				181E72E71E6D948000008486 /* OpenGL.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				181E72E01E6D786500008486 /* main.c in Sources */,
+				181E72E01E6D786500008486 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,14 +236,30 @@
 		181E72E41E6D786500008486 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/1.13.0/lib,
+					/usr/local/Cellar/glfw3/3.1.2/lib,
+				);
+				OBJROOT = /Volumes/SEAGATE/Mac/Debug/OpenGL/OpenGLMathTraining;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = /Volumes/SEAGATE/Mac/Debug/OpenGL/OpenGLMathTraining;
 			};
 			name = Debug;
 		};
 		181E72E51E6D786500008486 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/1.13.0/lib,
+					/usr/local/Cellar/glfw3/3.1.2/lib,
+				);
+				OBJROOT = /Volumes/SEAGATE/Mac/Debug/OpenGL/OpenGLMathTraining;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = /Volumes/SEAGATE/Mac/Debug/OpenGL/OpenGLMathTraining;
 			};
 			name = Release;
 		};
@@ -246,6 +282,7 @@
 				181E72E51E6D786500008486 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
