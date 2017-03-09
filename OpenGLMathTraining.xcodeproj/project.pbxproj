@@ -12,6 +12,7 @@
 		181E72EA1E6D949700008486 /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 181E72E91E6D949700008486 /* libGLEW.1.13.0.dylib */; };
 		181E72EC1E6D94B700008486 /* libglfw3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 181E72EB1E6D94B700008486 /* libglfw3.3.1.dylib */; };
 		18CCF4AB1E7126D4006161C5 /* shaders in CopyFiles */ = {isa = PBXBuildFile; fileRef = 18CCF4AA1E712692006161C5 /* shaders */; };
+		18CCF4B01E712BA6006161C5 /* CoordinatesSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CCF4AE1E712BA6006161C5 /* CoordinatesSystem.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +37,8 @@
 		18CCF4AA1E712692006161C5 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shaders; sourceTree = "<group>"; };
 		18CCF4AC1E712777006161C5 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
 		18CCF4AD1E7129A7006161C5 /* callbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = callbacks.h; sourceTree = "<group>"; };
+		18CCF4AE1E712BA6006161C5 /* CoordinatesSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoordinatesSystem.cpp; sourceTree = "<group>"; };
+		18CCF4AF1E712BA6006161C5 /* CoordinatesSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CoordinatesSystem.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +79,8 @@
 				181E72DF1E6D786500008486 /* main.cpp */,
 				18CCF4AC1E712777006161C5 /* Shader.h */,
 				18CCF4AD1E7129A7006161C5 /* callbacks.h */,
+				18CCF4AE1E712BA6006161C5 /* CoordinatesSystem.cpp */,
+				18CCF4AF1E712BA6006161C5 /* CoordinatesSystem.hpp */,
 			);
 			path = OpenGLMathTraining;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CCF4B01E712BA6006161C5 /* CoordinatesSystem.cpp in Sources */,
 				181E72E01E6D786500008486 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
