@@ -20,7 +20,6 @@
 
 extern Camera *camera;
 
-
 CoordinatesSystem::CoordinatesSystem(Shader *shader) :
     myShader(shader)
 {
@@ -72,9 +71,26 @@ void CoordinatesSystem::Render()
     myShader->Use();
     glBindVertexArray(VAO);
     
+    // Transformation matrix
+    glm::mat4 transformMatrix;
+    
+    glm::mat4 view;
+    view = camera->GetViewMatrix();
+    
+    glm::mat4 projection;
+    projection = camera->GetProjection();
+    
+    glm::mat4 model;
+    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.0f));
+    model = glm::scale(model, glm::vec3(2.0f));
+    model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+    
+    transformMatrix = projection * view * model;
+    
+    
     // Camera transformation
     GLuint transformLoc = glGetUniformLocation(myShader->Program, "transformMatrix");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(camera->GetViewMatrix()));
+    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transformMatrix));
     
     //glDrawArrays(GL_TRIANGLES, 0, 3);
     glDrawArrays(GL_LINES, 0, 6);

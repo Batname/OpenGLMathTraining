@@ -17,7 +17,10 @@
 #include "CoordinatesSystem.hpp"
 
 // Window dimensions
-const GLuint WIDTH = 800, HEIGHT = 600;
+GLuint WIDTH = 800, HEIGHT = 600;
+
+GLfloat deltaTime = 0.0f;
+GLfloat lastFrame = 0.0f;
 
 GLFWwindow* window;
 Camera *camera;
@@ -41,6 +44,11 @@ int main()
     
     // Set the required callback functions
     glfwSetKeyCallback(window, key_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
+    
+    // Options
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     
     // Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
     glewExperimental = GL_TRUE;
@@ -63,8 +71,14 @@ int main()
     // Game loop
     while (!glfwWindowShouldClose(window))
     {
+        // Set frame time
+        GLfloat currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+        
         // Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
         glfwPollEvents();
+        Do_Movement();
         
         // Render
         // Clear the colorbuffer
