@@ -23,7 +23,7 @@ protected:
 private:
     enum Constants
     {
-        VERTICES_QTY = 18
+        VERTICES_QTY = 36
     };
     
     GLfloat Vertices[VERTICES_QTY];

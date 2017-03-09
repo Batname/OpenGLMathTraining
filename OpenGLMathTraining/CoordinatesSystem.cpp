@@ -19,9 +19,12 @@ CoordinatesSystem::CoordinatesSystem(Shader *shader) :
     // Set up vertex data (and buffer(s)) and attribute pointers
     GLfloat vertices[VERTICES_QTY] = {
         // Positions         // Colors
-        0.5f, -0.5f, 0.0f,   1.0f, 0.0f, 0.0f,  // Bottom Right
-        -0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,  // Bottom Left
-        0.0f,  0.5f, 0.0f,   0.0f, 0.0f, 1.0f   // Top
+        0.5f,  0.0f,  0.0f,   1.0f, 0.0f, 0.0f,  // X main
+       -0.5f,  0.0f,  0.0f,   0.0f, 1.0f, 0.0f,  // X main
+        0.0f,  0.5f,  0.0f,   1.0f, 0.0f, 0.0f,  // Y main
+        0.0f, -0.5f,  0.0f,   0.0f, 1.0f, 0.0f,  // Y main
+        0.0f,  0.0f, -0.5f,   1.0f, 0.0f, 0.0f,  // Z main
+        0.0f,  0.0f,  0.5f,   0.0f, 1.0f, 0.0f   // Z main
     };
     
     memcpy(Vertices, vertices, sizeof(vertices));
@@ -61,6 +64,6 @@ void CoordinatesSystem::Render()
     myShader->Use();
     glBindVertexArray(VAO);
     //glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDrawArrays(GL_LINES, 0, 2);
+    glDrawArrays(GL_LINES, 0, 6);
     glBindVertexArray(0);
 }
