@@ -60,6 +60,7 @@ void CoordinatesSystem::Render()
     // Draw the triangle
     myShader->Use();
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    //glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_LINES, 0, 2);
     glBindVertexArray(0);
 }
