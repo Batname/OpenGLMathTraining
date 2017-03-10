@@ -58,6 +58,9 @@ int main()
     
     // Define the viewport dimensions
     glViewport(0, 0, WIDTH, HEIGHT);
+
+    // Setup some OpenGL options
+    glEnable(GL_DEPTH_TEST);
     
     
     // Set the camera
@@ -65,13 +68,17 @@ int main()
     
     // Build and compile our shader program
     Shader ourShader("./shaders/vertex.glsl", "./shaders/fragment.glsl");
+
     CoordinatesSystem coordinatesSystem(&ourShader);
     coordinatesSystem.Bind();
     
     
-    Shader cubeShader("./shaders/vertex.glsl", "./shaders/fragment.glsl");
-    Cube cube(&cubeShader);
+    Cube cube(&ourShader);
     cube.BindCube();
+    
+    Shader vectorShader("./shaders/vectors.glsl", "./shaders/fragment.glsl");
+    Cube cubeVectors(&vectorShader);
+    cubeVectors.BindVectors();
     
     
     // Game loop
@@ -89,10 +96,11 @@ int main()
         // Render
         // Clear the colorbuffer
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         coordinatesSystem.Render();
         cube.RenderCube();
+        cubeVectors.RenderVectors();
         
         // Swap the screen buffers
         glfwSwapBuffers(window);

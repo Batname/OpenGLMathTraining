@@ -29,7 +29,9 @@ public:
 protected:
 private:
 
-    GLfloat *VectorVertices;
+    glm::vec3 *VectorVertices;
+    unsigned int VectorNumVertices;
+    unsigned int SizeVectorVertices;
     GLuint Vector_VBO, Vector_VAO;
     
     glm::vec3 *CubeVertices;

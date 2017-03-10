@@ -86,7 +86,7 @@ Cube::Cube(class Shader *shader) : myShader(shader)
     SizeCubeVertices = sizeof(cubeVertices);
 
     CubeVertices = new vec3[CubeNumVertices];
-    memcpy(CubeVertices, cubeVertices, sizeof(cubeVertices));
+    memcpy(CubeVertices, cubeVertices, SizeCubeVertices);
     
     unsigned short cubeIndices[] = {
         0,   1,  2,  0,  2,  3, // Top
@@ -100,25 +100,94 @@ Cube::Cube(class Shader *shader) : myShader(shader)
     CubeNumIndices = NUM_ARRAY_ELEMENTS(cubeIndices);
     SizeCubeIndices = sizeof(cubeIndices);
     CubeIndices = new GLushort[CubeNumIndices];
-    memcpy(CubeIndices, cubeIndices, sizeof(cubeIndices));
+    memcpy(CubeIndices, cubeIndices, SizeCubeIndices);
+    
+    // Vectors
+    vec3 vectorVertices[] =
+    {
+        vec3(+2.5f, +0.0f, +0.5f),  // 0
+        vec3(+0.0f, +0.0f, +1.0f),	// Color
+        vec3(+0.0f, +0.0f, +0.5f),  // 1
+        vec3(+0.0f, +0.0f, +1.0f),	// Color
+    };
+    
+    VectorNumVertices = NUM_ARRAY_ELEMENTS(vectorVertices);
+    SizeVectorVertices = sizeof(VectorNumVertices);
+    
+    VectorVertices = new vec3[VectorNumVertices];
+    memcpy(VectorVertices, vectorVertices, SizeVectorVertices);
+    
 }
 
 Cube::~Cube()
 {
     delete CubeVertices;
     delete CubeIndices;
+    delete VectorVertices;
     
     glDeleteVertexArrays(1, &Cube_VAO);
     glDeleteBuffers(1, &Cube_VBO);
     glDeleteBuffers(1, &Cube_EBO);
+    
+    glDeleteVertexArrays(1, &Vector_VAO);
+    glDeleteBuffers(1, &Vector_VBO);
 }
 
 void Cube::BindVectors()
 {
+    glGenVertexArrays(1, &Vector_VAO);
+    glGenBuffers(1, &Vector_VBO);
+    // Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
+    glBindVertexArray(Vector_VAO);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, Vector_VBO);
+    
+    glBufferData(GL_ARRAY_BUFFER, SizeVectorVertices, VectorVertices, GL_STATIC_DRAW);
+    
+    // Position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
+    glEnableVertexAttribArray(0);
+    // Color attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(1);
+    
+    glBindVertexArray(0); // Unbind VAO
 }
 
 void Cube::RenderVectors()
 {
+    // Draw the triangle
+    myShader->Use();
+    glBindVertexArray(Vector_VAO);
+    
+//    // append new vertex
+//    glBindBuffer(GL_ARRAY_BUFFER, Vector_VBO);
+//    glBufferSubData(GL_ARRAY_BUFFER, 3, 6 * sizeof(GLfloat), VectorVertices);
+    
+    // Transformation matrix
+    glm::mat4 transformMatrix;
+    
+    glm::mat4 view;
+    view = camera->GetViewMatrix();
+    
+    glm::mat4 projection;
+    projection = camera->GetProjection();
+    
+    glm::mat4 model;
+    model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+    model = glm::scale(model, glm::vec3(7.0f, 2.0f, 7.0f));
+    
+    
+    transformMatrix = projection * view * model;
+    
+    
+    // Camera transformation
+    GLuint transformLoc = glGetUniformLocation(myShader->Program, "transformMatrix");
+    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transformMatrix));
+    
+    glDrawArrays(GL_LINES, 0, VectorNumVertices);
+    glBindVertexArray(0);
 }
 
 void Cube::BindCube()
@@ -161,7 +230,7 @@ void Cube::RenderCube()
     projection = camera->GetProjection();
     
     glm::mat4 model;
-    model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+    model = glm::translate(model, glm::vec3(0.5f, 0.5f, 0.5f));
     model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
     model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
     
