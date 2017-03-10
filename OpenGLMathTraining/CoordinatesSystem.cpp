@@ -101,7 +101,7 @@ void CoordinatesSystem::Render()
     projection = camera->GetProjection();
     
     glm::mat4 model;
-    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -5.0f));
+    model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
     model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
     model = glm::scale(model, glm::vec3(7.0f, 2.0f, 7.0f));
 

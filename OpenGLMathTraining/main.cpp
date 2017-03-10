@@ -15,6 +15,7 @@
 
 // graphics
 #include "CoordinatesSystem.hpp"
+#include "Cube.hpp"
 
 // Window dimensions
 GLuint WIDTH = 800, HEIGHT = 600;
@@ -60,12 +61,17 @@ int main()
     
     
     // Set the camera
-    camera = new Camera;
+    camera = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
     
     // Build and compile our shader program
     Shader ourShader("./shaders/vertex.glsl", "./shaders/fragment.glsl");
     CoordinatesSystem coordinatesSystem(&ourShader);
     coordinatesSystem.Bind();
+    
+    
+    Shader cubeShader("./shaders/vertex.glsl", "./shaders/fragment.glsl");
+    Cube cube(&cubeShader);
+    cube.BindCube();
     
     
     // Game loop
@@ -86,6 +92,7 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         coordinatesSystem.Render();
+        cube.RenderCube();
         
         // Swap the screen buffers
         glfwSwapBuffers(window);
