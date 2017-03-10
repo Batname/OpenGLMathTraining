@@ -29,7 +29,7 @@ public:
 protected:
 private:
 
-    glm::vec3 *VectorVertices;
+    GLfloat *VectorVertices;
     unsigned int VectorNumVertices;
     unsigned int SizeVectorVertices;
     GLuint Vector_VBO, Vector_VAO;
@@ -45,6 +45,8 @@ private:
 
     
     class Shader *myShader;
+    
+    glm::mat4 model;
 };
 
 #endif /* Cube_hpp */

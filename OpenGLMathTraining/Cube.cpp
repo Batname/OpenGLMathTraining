@@ -103,20 +103,36 @@ Cube::Cube(class Shader *shader) : myShader(shader)
     memcpy(CubeIndices, cubeIndices, SizeCubeIndices);
     
     // Vectors
-    vec3 vectorVertices[] =
+    GLfloat vectorVertices[] =
     {
-        vec3(+2.5f, +0.0f, +0.5f),  // 0
-        vec3(+0.0f, +0.0f, +1.0f),	// Color
-        vec3(+0.0f, +0.0f, +0.5f),  // 1
-        vec3(+0.0f, +0.0f, +1.0f),	// Color
+       -1.0f,  1.0f,  1.0f,   0.0f, 0.0f, 1.0f,  // 1
+        0.0f,  0.0f,  0.0f,   0.0f, 0.0f, 1.0f,  // origin
+        1.0f,  1.0f,  1.0f,   0.0f, 0.0f, 1.0f,  // 2
+        0.0f,  0.0f,  0.0f,   0.0f, 0.0f, 1.0f,  // origin
+        1.0f,  1.0f, -1.0f,   0.0f, 0.0f, 1.0f,  // 3
+        0.0f,  0.0f,  0.0f,   0.0f, 0.0f, 1.0f,  // origin
+       -1.0f,  1.0f, -1.0f,   0.0f, 0.0f, 1.0f,  // 4
+        0.0f,  0.0f,  0.0f,   0.0f, 0.0f, 1.0f,  // origin
+        1.0f, -1.0f, -1.0f,   0.0f, 0.0f, 1.0f,  // 5
+        0.0f,  0.0f,  0.0f,   0.0f, 0.0f, 1.0f,  // origin
+       -1.0f, -1.0f, -1.0f,   0.0f, 0.0f, 1.0f,  // 6
+        0.0f,  0.0f,  0.0f,   0.0f, 0.0f, 1.0f,  // origin
+        1.0f, -1.0f,  1.0f,   0.0f, 0.0f, 1.0f,  // 7
+        0.0f,  0.0f,  0.0f,   0.0f, 0.0f, 1.0f,  // origin
+       -1.0f, -1.0f,  1.0f,   0.0f, 0.0f, 1.0f,  // 8
+        0.0f,  0.0f,  0.0f,   0.0f, 0.0f, 1.0f,  // origin
     };
     
     VectorNumVertices = NUM_ARRAY_ELEMENTS(vectorVertices);
-    SizeVectorVertices = sizeof(VectorNumVertices);
+    SizeVectorVertices = sizeof(vectorVertices);
     
-    VectorVertices = new vec3[VectorNumVertices];
+    VectorVertices = new GLfloat[VectorNumVertices];
     memcpy(VectorVertices, vectorVertices, SizeVectorVertices);
     
+    
+    model = glm::translate(model, glm::vec3(0.5f, 0.5f, 0.5f));
+    model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+    model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
 }
 
 Cube::~Cube()
@@ -141,7 +157,7 @@ void Cube::BindVectors()
     glBindVertexArray(Vector_VAO);
     
     glBindBuffer(GL_ARRAY_BUFFER, Vector_VBO);
-    
+
     glBufferData(GL_ARRAY_BUFFER, SizeVectorVertices, VectorVertices, GL_STATIC_DRAW);
     
     // Position attribute
@@ -159,34 +175,25 @@ void Cube::RenderVectors()
     // Draw the triangle
     myShader->Use();
     glBindVertexArray(Vector_VAO);
-    
-//    // append new vertex
-//    glBindBuffer(GL_ARRAY_BUFFER, Vector_VBO);
-//    glBufferSubData(GL_ARRAY_BUFFER, 3, 6 * sizeof(GLfloat), VectorVertices);
-    
+
     // Transformation matrix
-    glm::mat4 transformMatrix;
-    
     glm::mat4 view;
     view = camera->GetViewMatrix();
     
     glm::mat4 projection;
-    projection = camera->GetProjection();
-    
-    glm::mat4 model;
-    model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-    model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-    model = glm::scale(model, glm::vec3(7.0f, 2.0f, 7.0f));
-    
-    
-    transformMatrix = projection * view * model;
-    
+    projection = camera->GetProjection();    
     
     // Camera transformation
-    GLuint transformLoc = glGetUniformLocation(myShader->Program, "transformMatrix");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transformMatrix));
+    GLuint projectionLoc = glGetUniformLocation(myShader->Program, "projectionMatrix");
+    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
     
-    glDrawArrays(GL_LINES, 0, VectorNumVertices);
+    GLuint viewLoc = glGetUniformLocation(myShader->Program, "viewMatrix");
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+    
+    GLuint modelLoc = glGetUniformLocation(myShader->Program, "modelMatrix");
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+    
+    glDrawArrays(GL_LINES, 0, 16);
     glBindVertexArray(0);
 }
 
@@ -223,18 +230,13 @@ void Cube::RenderCube()
     // Transformation matrix
     glm::mat4 transformMatrix;
     
+    
+    // Transformation matrix
     glm::mat4 view;
     view = camera->GetViewMatrix();
     
     glm::mat4 projection;
     projection = camera->GetProjection();
-    
-    glm::mat4 model;
-    model = glm::translate(model, glm::vec3(0.5f, 0.5f, 0.5f));
-    model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-    model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
-    
-    
     transformMatrix = projection * view * model;
     
     
